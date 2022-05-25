@@ -4,24 +4,24 @@ import axios from 'axios'
 import { Button } from 'react-bootstrap'
 
 
-export class Product extends Component {
+export class Store extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: [],
+            stores: [],
         };
     }
 
     componentDidMount(){
-        this.fetchProducts();
+        this.fetchStores();
     }
 
-    fetchProducts = () => {
+    fetchStores = () => {
         axios
-          .get("products/getproducts")
+          .get("stores/getstores")
           .then(({ data }) => {
               this.setState({
-                  products: data,
+                  stores: data,
               })
               console.log(data);
           })
@@ -32,25 +32,25 @@ export class Product extends Component {
 
 
   render() {
-      const { products } = this.state;
+      const { stores } = this.state;
     return (
       <div>
           <Table celled>
             <Table.Header>
             <Table.Row>
                 <Table.HeaderCell>Name</Table.HeaderCell>
-                <Table.HeaderCell>Price</Table.HeaderCell>
+                <Table.HeaderCell>Address</Table.HeaderCell>
                 <Table.HeaderCell>Action</Table.HeaderCell>
                 <Table.HeaderCell>Action</Table.HeaderCell>
             </Table.Row>
             </Table.Header>
 
             <Table.Body>
-              {products.map((s, index) => {
+              {stores.map((s, index) => {
                   return (
                       <Table.Row>
                           <Table.Cell>{s.name}</Table.Cell>
-                          <Table.Cell>{s.price}</Table.Cell>
+                          <Table.Cell>{s.address}</Table.Cell>
                           <Table.Cell>
                             <Button variant="success">Edit</Button>
                           </Table.Cell>
