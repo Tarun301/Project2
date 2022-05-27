@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar,Nav } from 'react-bootstrap';
+//import 'semantic-ui-css/semantic.min.css';
 
 export class Navigation extends Component{
 

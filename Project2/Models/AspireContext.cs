@@ -22,7 +22,7 @@ namespace Project2.Models
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
 
-       
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,13 +36,11 @@ namespace Project2.Models
 
                 entity.Property(e => e.Address)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasColumnType("text");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -53,13 +51,16 @@ namespace Project2.Models
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Price).HasColumnType("money");
             });
 
             modelBuilder.Entity<Sale>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.DateSold).HasColumnType("date");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Sales)
@@ -88,13 +89,11 @@ namespace Project2.Models
 
                 entity.Property(e => e.Address)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasColumnType("text");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);

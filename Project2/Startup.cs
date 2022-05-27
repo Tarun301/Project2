@@ -26,6 +26,7 @@ namespace Project2
             services.AddControllersWithViews();
             var connection = Configuration.GetConnectionString("AspireDatabase");
             services.AddDbContext<AspireContext>(options => options.UseSqlServer(connection));
+            
 
 
             // In production, the React files will be served from this directory

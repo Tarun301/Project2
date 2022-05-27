@@ -24,7 +24,11 @@ namespace Project2.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sale>>> GetSales()
         {
-            return await _context.Sales.ToListAsync();
+            return await _context.Sales
+                 .Include(r => r.Customer)
+               .Include(r => r.Product)
+               .Include(r => r.Store)
+               .ToListAsync();
         }
 
         // GET: api/Sales/5
