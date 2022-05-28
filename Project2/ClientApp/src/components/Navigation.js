@@ -23,8 +23,8 @@ export class Navigation extends Component{
                 <NavLink className="d-inline p-2 bg-dark text-white" to="./store">
                 Store
                 </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="./sales">
-                Sales
+                <NavLink className="d-inline p-2 bg-dark text-white" to="./sale">
+                Sale
                 </NavLink>
 
                 </Nav>

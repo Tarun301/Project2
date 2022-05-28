@@ -22,7 +22,7 @@ export class Sale extends Component {
           .get("sales/getsales")
           .then(({ data }) => {
               this.setState({
-                  sales: data,
+                  Sales: data,
               })
               console.log(data);
           })
@@ -31,9 +31,20 @@ export class Sale extends Component {
           });
     };
 
+    deleteRecord = (Id) => {
+      axios
+          .delete('sales/DeleteSale/${Id}')
+          .then(({ data }) => {
+            console.log(data);
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+    };
+
 
   render() {
-      const { sales } = this.state;
+      const { Sales } = this.state;
     return (
       <div>
           <Table celled>
@@ -48,20 +59,21 @@ export class Sale extends Component {
             </Table.Row>
             </Table.Header>
 
-            <Table.Body>
-              {sales.map((s) => {
+           <Table.Body>
+              {Sales.map((s, index) => {
                   return (
-                      <Table.Row>
-                          <Table.Cell>{s.customer}</Table.Cell>
-                          <Table.Cell>{s.product}</Table.Cell>
-                          <Table.Cell>{s.store}</Table.Cell>
+                      <Table.Row key={s.Id}>
+                          <Table.Cell>{s.customer.name}</Table.Cell>
+                          <Table.Cell>{s.product.name}</Table.Cell>
+                          <Table.Cell>{s.store.name}</Table.Cell>
                           <Table.Cell>{s.dateSold}</Table.Cell>
                           <Table.Cell>
                             <Button variant="success">Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
-                            <Button variant="danger">Delete</Button>
+                            <Button variant="danger" onClick={() => this.deleteRecord(s.Id)}>Delete</Button>
                           </Table.Cell>
+                          
                       </Table.Row>
                   );
               })}

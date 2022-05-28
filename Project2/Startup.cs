@@ -24,6 +24,9 @@ namespace Project2
         {
 
             services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             var connection = Configuration.GetConnectionString("AspireDatabase");
             services.AddDbContext<AspireContext>(options => options.UseSqlServer(connection));
             

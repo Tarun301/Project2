@@ -11,8 +11,6 @@ import { Switch } from 'react-router-dom';
 
 import './custom.css'
 
-
-
 function App() {
   return (
     <BrowserRouter>
