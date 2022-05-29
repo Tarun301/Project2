@@ -9,14 +9,14 @@ import { BrowserRouter} from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 
-import './custom.css'
+import './semantic.min.css'
 
 function App() {
   return (
     <BrowserRouter>
     <div className='container'>
       <h3 className='m-3 d-flex justify-content-center'>
-        React Js 
+      
       </h3>
 
       <Navigation/>

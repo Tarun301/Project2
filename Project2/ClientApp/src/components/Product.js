@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
 import axios from 'axios'
-import { Button } from 'react-bootstrap'
+import { Button } from 'semantic-ui-react'
 
 
 export class Product extends Component {
@@ -52,10 +52,10 @@ export class Product extends Component {
                           <Table.Cell>{s.name}</Table.Cell>
                           <Table.Cell>{s.price}</Table.Cell>
                           <Table.Cell>
-                            <Button variant="success">Edit</Button>
+                            <Button color='green'>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
-                            <Button variant="danger">Delete</Button>
+                            <Button color='red'>Delete</Button>
                           </Table.Cell>
                       </Table.Row>
                   );

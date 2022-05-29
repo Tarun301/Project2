@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import axios from 'axios'
-import { Button } from 'react-bootstrap'
+import Create from './Create';
+
 
 
 export class Customer extends Component {
@@ -9,6 +10,7 @@ export class Customer extends Component {
         super(props);
         this.state = {
             customers: [],
+            showCreateModel: false
         };
     }
 
@@ -31,10 +33,20 @@ export class Customer extends Component {
     };
 
 
+  openCreateModal = (value) => {
+    this.setState({
+      showCreateModel: value,
+    });
+
+  };
+
+
   render() {
-      const { customers } = this.state;
+      const { customers, showCreateModel } = this.state;
     return (
       <div>
+        <Create showCreateModel={showCreateModel} openCreateModal={this.openCreateModal} fetchCustomers={this.fetchCustomers}/>
+        <Button color='blue' className='customer-create-button' onClick={() => this.openCreateModal(true)}>Create Customer</Button>
           <Table celled>
             <Table.Header>
             <Table.Row>
@@ -52,10 +64,10 @@ export class Customer extends Component {
                           <Table.Cell>{s.name}</Table.Cell>
                           <Table.Cell>{s.address}</Table.Cell>
                           <Table.Cell>
-                            <Button variant="success">Edit</Button>{' '}
+                            <Button color='green'>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
-                            <Button variant="danger">Delete</Button>
+                            <Button color='red'>Delete</Button>
                           </Table.Cell>
                       </Table.Row>
                   );
