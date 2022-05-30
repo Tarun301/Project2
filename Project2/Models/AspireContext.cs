@@ -32,8 +32,6 @@ namespace Project2.Models
             {
                 entity.ToTable("Customer");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasColumnType("text");
@@ -47,8 +45,6 @@ namespace Project2.Models
             {
                 entity.ToTable("Product");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -58,6 +54,8 @@ namespace Project2.Models
 
             modelBuilder.Entity<Sale>(entity =>
             {
+                entity.ToTable("Sale");
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.DateSold).HasColumnType("date");
@@ -66,26 +64,24 @@ namespace Project2.Models
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Customer");
+                    .HasConstraintName("FK_Sale_Customer");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Product");
+                    .HasConstraintName("FK_Sale_Product");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.StoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sales_Store");
+                    .HasConstraintName("FK_Sale_Store");
             });
 
             modelBuilder.Entity<Store>(entity =>
             {
                 entity.ToTable("Store");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Address)
                     .IsRequired()

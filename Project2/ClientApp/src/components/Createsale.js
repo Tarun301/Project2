@@ -18,7 +18,8 @@ const { showCreatesaleModel, openCreatesaleModal, fetchSales } = props;
   })
 
   const createSale = () => {
-      axios.post("sales/PostSale",{
+      axios
+        .post("/Sales/PostSale",{
           Customer: Customer,
           Product: Product,
           Store: Store,

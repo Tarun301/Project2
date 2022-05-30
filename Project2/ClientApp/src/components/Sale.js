@@ -21,7 +21,7 @@ export class Sale extends Component {
 
     fetchSales = () => {
         axios
-          .get("sales/getsales")
+          .get("sales/getSales")
           .then(({ data }) => {
               this.setState({
                   Sales: data,

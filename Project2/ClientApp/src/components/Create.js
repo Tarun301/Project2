@@ -15,7 +15,7 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
 
   const CreateCustomer = () => {
       axios
-       .post("customers/PostCustomer",{
+       .post("/Customers/PostCustomer",{
           Name: Name,
           Address: Address,
         })
