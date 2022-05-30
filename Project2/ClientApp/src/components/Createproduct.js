@@ -2,26 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { Button, Modal, Form} from 'semantic-ui-react'
 import axios from 'axios'
 
-function Create(props) {
-const { showCreateModel, openCreateModal, fetchCustomers } = props;
+function Createproduct(props) {
+const { showCreateproductModel, openCreateproductModal, fetchProducts } = props;
 
   const [Name, setName] = useState("");
-  const [Address, setAddress] = useState("");
+  const [Price, setPrice] = useState("");
 
   useEffect(() => {
       console.log(Name)
-      console.log(Address)
+      console.log(Price)
   })
 
-  const CreateCustomer = () => {
+  const createProduct = () => {
       axios
-       .post("customers/PostCustomer",{
+       .post("products/PostProduct",{
           Name: Name,
-          Address: Address,
+          Price: Price,
         })
         .then(({ data }) => {
-            fetchCustomers();
-            openCreateModal(true);
+            fetchProducts();
+            openCreateproductModal(false);
             console.log(data);
         })
         .catch((err) => {
@@ -33,10 +33,10 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
 
   return (
     <Modal
-      open={ showCreateModel }
+      open={ showCreateproductModel }
      
     >
-      <Modal.Header>Create Customer</Modal.Header>
+      <Modal.Header>Create Products</Modal.Header>
       <Modal.Content>
         <Form>
             <Form.Field>
@@ -44,20 +44,20 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
             <input placeholder='Name' onChange={(e) => setName(e.target.value)}/>
             </Form.Field>
             <Form.Field>
-            <label>Address</label>
-            <input placeholder='Address' onChange={(e) => setAddress(e.target.value)} />
+            <label>Price</label>
+            <input placeholder='Price' onChange={(e) => setPrice(e.target.value)} />
             </Form.Field>
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => openCreateModal(false)}>
+        <Button color='black' onClick={() => openCreateproductModal(false)}>
           Cancel
         </Button>
         <Button
           content="Submit"
           labelPosition='right'
           icon='checkmark'
-          onClick={CreateCustomer}
+          onClick={createProduct}
           positive
         />
       </Modal.Actions>
@@ -65,4 +65,4 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
   )
 }
 
-export default Create
+export default Createproduct

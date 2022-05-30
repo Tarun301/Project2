@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import axios from 'axios'
+import Createsale from './Createsale';
 
 
 
@@ -10,6 +11,7 @@ export class Sale extends Component {
         super(props);
         this.state = {
             Sales: [],
+            showCreatesaleModel: false,
         };
     }
 
@@ -31,9 +33,9 @@ export class Sale extends Component {
           });
     };
 
-    deleteRecord = (Id) => {
+    deleteRecord = (id) => {
       axios
-          .delete('sales/DeleteSale/${Id}')
+          .delete(`sales/DeleteSale/${id}`)
           .then(({ data }) => {
             console.log(data);
           })
@@ -42,11 +44,22 @@ export class Sale extends Component {
           });
     };
 
+    openCreatesaleModal = (value) => {
+      this.setState({
+        showCreatesaleModel: value,
+      });
+  
+    };
+
+
+
 
   render() {
-      const { Sales } = this.state;
+      const { Sales, showCreatesaleModel } = this.state;
     return (
       <div>
+        <Createsale showCreatesaleModel={showCreatesaleModel} openCreatesaleModal={this.openCreatesaleModal} fetchSales={this.fetchSales}/>
+        <Button color='blue' className='sale-create-button' onClick={() => this.openCreatesaleModal(true)}>Create Sale</Button>
           <Table celled>
             <Table.Header>
             <Table.Row>
@@ -62,7 +75,7 @@ export class Sale extends Component {
            <Table.Body>
               {Sales.map((s, index) => {
                   return (
-                      <Table.Row key={s.Id}>
+                      <Table.Row key={s.id}>
                           <Table.Cell>{s.customer.name}</Table.Cell>
                           <Table.Cell>{s.product.name}</Table.Cell>
                           <Table.Cell>{s.store.name}</Table.Cell>
@@ -71,7 +84,7 @@ export class Sale extends Component {
                             <Button color='green'>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
-                            <Button color='red' onClick={() => this.deleteRecord(s.Id)}>Delete</Button>
+                            <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>
                           </Table.Cell>
                           
                       </Table.Row>

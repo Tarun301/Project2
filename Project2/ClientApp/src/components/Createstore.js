@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Button, Modal, Form} from 'semantic-ui-react'
 import axios from 'axios'
 
-function Create(props) {
-const { showCreateModel, openCreateModal, fetchCustomers } = props;
+function Createstore(props) {
+const { showCreatestoreModel, openCreatestoreModal, fetchStores } = props;
 
   const [Name, setName] = useState("");
   const [Address, setAddress] = useState("");
@@ -13,15 +13,15 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
       console.log(Address)
   })
 
-  const CreateCustomer = () => {
-      axios
-       .post("customers/PostCustomer",{
+  const createStore = () => {
+      axios.post("stores/PostStore",{
           Name: Name,
           Address: Address,
         })
         .then(({ data }) => {
-            fetchCustomers();
-            openCreateModal(true);
+            //this.fetchStores();
+            fetchStores();
+            openCreatestoreModal(false);
             console.log(data);
         })
         .catch((err) => {
@@ -33,10 +33,10 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
 
   return (
     <Modal
-      open={ showCreateModel }
+      open={ showCreatestoreModel }
      
     >
-      <Modal.Header>Create Customer</Modal.Header>
+      <Modal.Header>Create Store</Modal.Header>
       <Modal.Content>
         <Form>
             <Form.Field>
@@ -50,14 +50,14 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => openCreateModal(false)}>
+        <Button color='black' onClick={() => openCreatestoreModal(false)}>
           Cancel
         </Button>
         <Button
           content="Submit"
           labelPosition='right'
           icon='checkmark'
-          onClick={CreateCustomer}
+          onClick={createStore}
           positive
         />
       </Modal.Actions>
@@ -65,4 +65,4 @@ const { showCreateModel, openCreateModal, fetchCustomers } = props;
   )
 }
 
-export default Create
+export default Createstore

@@ -10,7 +10,7 @@ export class Customer extends Component {
         super(props);
         this.state = {
             customers: [],
-            showCreateModel: false
+            showCreateModel: false,
         };
     }
 
@@ -41,6 +41,18 @@ export class Customer extends Component {
   };
 
 
+  deleteRecord = (id) => {
+    axios
+        .delete(`customers/DeleteCustomer/${id}`)
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+  };
+
+
   render() {
       const { customers, showCreateModel } = this.state;
     return (
@@ -60,14 +72,14 @@ export class Customer extends Component {
             <Table.Body>
               {customers.map((s, index) => {
                   return (
-                      <Table.Row>
+                      <Table.Row key={s.id}>
                           <Table.Cell>{s.name}</Table.Cell>
                           <Table.Cell>{s.address}</Table.Cell>
                           <Table.Cell>
                             <Button color='green'>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
-                            <Button color='red'>Delete</Button>
+                            <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>
                           </Table.Cell>
                       </Table.Row>
                   );

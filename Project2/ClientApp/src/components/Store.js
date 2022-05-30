@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import axios from 'axios'
+import Createstore from './Createstore';
 
 
 export class Store extends Component {
@@ -8,6 +9,7 @@ export class Store extends Component {
         super(props);
         this.state = {
             stores: [],
+            showCreatestoreModel: false,
         };
     }
 
@@ -29,11 +31,31 @@ export class Store extends Component {
           });
     };
 
+    openCreatestoreModal = (value) => {
+      this.setState({
+        showCreatestoreModel: value,
+      });
+  
+    };
+
+    deleteRecord = (id) => {
+      axios
+          .delete(`stores/DeleteStore/${id}`)
+          .then(({ data }) => {
+            console.log(data);
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+    };
+
 
   render() {
-      const { stores } = this.state;
+      const { stores, showCreatestoreModel } = this.state;
     return (
       <div>
+        <Createstore showCreatestoreModel={showCreatestoreModel} openCreatestoreModal={this.openCreatestoreModal} fetchStores={this.fetchStores}/>
+        <Button color='blue' className='store-create-button' onClick={() => this.openCreatestoreModal(true)}>Create Store</Button>
           <Table celled>
             <Table.Header>
             <Table.Row>
@@ -54,7 +76,7 @@ export class Store extends Component {
                             <Button color='green'>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
-                            <Button color='red'>Delete</Button>
+                            <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>
                           </Table.Cell>
                       </Table.Row>
                   );
