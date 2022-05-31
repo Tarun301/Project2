@@ -54,29 +54,25 @@ namespace Project2.Models
 
             modelBuilder.Entity<Sale>(entity =>
             {
-                entity.ToTable("Sale");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.DateSold).HasColumnType("date");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sale_Customer");
+                    .HasConstraintName("FK_Sales_Customer");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sale_Product");
+                    .HasConstraintName("FK_Sales_Product");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Sales)
                     .HasForeignKey(d => d.StoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sale_Store");
+                    .HasConstraintName("FK_Sales_Store");
             });
 
             modelBuilder.Entity<Store>(entity =>

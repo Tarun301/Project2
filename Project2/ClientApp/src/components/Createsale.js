@@ -5,24 +5,24 @@ import axios from 'axios'
 function Createsale(props) {
 const { showCreatesaleModel, openCreatesaleModal, fetchSales } = props;
 
-  const [Customer, setCustomer] = useState("");
-  const [Product, setProduct] = useState("");
-  const [Store, setStore] = useState("");
+  const [CustomerId, setCustomerId] = useState("");
+  const [ProductId, setProductId] = useState("");
+  const [StoreId, setStoreId] = useState("");
   const [DateSold, setDateSold] = useState("");
 
   useEffect(() => {
-      console.log(Customer)
-      console.log(Product)
-      console.log(Store)
+      console.log(CustomerId)
+      console.log(ProductId)
+      console.log(StoreId)
       console.log(DateSold)
   })
 
   const createSale = () => {
       axios
         .post("/Sales/PostSale",{
-          Customer: Customer,
-          Product: Product,
-          Store: Store,
+          CustomerId: CustomerId,
+          ProductId: ProductId,
+          StoreId: StoreId,
           DateSold: DateSold,
         })
         .then(({ data }) => {
@@ -48,15 +48,15 @@ const { showCreatesaleModel, openCreatesaleModal, fetchSales } = props;
         <Form>
             <Form.Field>
             <label>Customer</label>
-            <input placeholder='Customer' onChange={(e) => setCustomer(e.target.value)}/>
+            <input placeholder='Customer' onChange={(e) => setCustomerId(e.target.value)}/>
             </Form.Field>
             <Form.Field>
             <label>Product</label>
-            <input placeholder='Product' onChange={(e) => setProduct(e.target.value)} />
+            <input placeholder='Product' onChange={(e) => setProductId(e.target.value)} />
             </Form.Field>
             <Form.Field>
             <label>Store</label>
-            <input placeholder='Store' onChange={(e) => setStore(e.target.value)} />
+            <input placeholder='Store' onChange={(e) => setStoreId(e.target.value)} />
             </Form.Field>
             <Form.Field>
             <label>DateSold</label>
