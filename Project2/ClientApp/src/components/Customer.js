@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import axios from 'axios'
 import Create from './Create';
+import EditCustomer from './EditCustomer';
 
 
 
@@ -11,6 +12,7 @@ export class Customer extends Component {
         this.state = {
             customers: [],
             showCreateModel: false,
+            showEditCustomerModel: false,
         };
     }
 
@@ -40,6 +42,15 @@ export class Customer extends Component {
 
   };
 
+  openEditCustomerModal = (value) => {
+    this.setState({
+      showEditCustomerModel: value,
+    });
+
+  };
+
+ 
+
 
   deleteRecord = (id) => {
     axios
@@ -54,10 +65,12 @@ export class Customer extends Component {
 
 
   render() {
-      const { customers, showCreateModel } = this.state;
+      const { customers, showCreateModel, showEditCustomerModel } = this.state;
     return (
       <div>
         <Create showCreateModel={showCreateModel} openCreateModal={this.openCreateModal} fetchCustomers={this.fetchCustomers}/>
+        <EditCustomer showEditCustomerModel={showEditCustomerModel} openEditCustomerModal={this.openEditCustomerModal} fetchCustomers={this.fetchCustomers}/>
+       
         <Button color='blue' className='customer-create-button' onClick={() => this.openCreateModal(true)}>Create Customer</Button>
           <Table celled>
             <Table.Header>
@@ -76,7 +89,7 @@ export class Customer extends Component {
                           <Table.Cell>{s.name}</Table.Cell>
                           <Table.Cell>{s.address}</Table.Cell>
                           <Table.Cell>
-                            <Button color='green'>Edit</Button>
+                            <Button color='green' className='customer-edit-button' onClick={() => this.openEditCustomerModal(true)}>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
                             <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>
