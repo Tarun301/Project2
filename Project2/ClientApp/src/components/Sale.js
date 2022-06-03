@@ -51,6 +51,7 @@ export class Sale extends Component {
   
     };
 
+    
 
 
 
@@ -59,6 +60,7 @@ export class Sale extends Component {
     return (
       <div>
         <Createsale showCreatesaleModel={showCreatesaleModel} openCreatesaleModal={this.openCreatesaleModal} fetchSales={this.fetchSales}/>
+        
         <Button color='blue' className='sale-create-button' onClick={() => this.openCreatesaleModal(true)}>Create Sale</Button>
           <Table celled>
             <Table.Header>
@@ -81,7 +83,7 @@ export class Sale extends Component {
                           <Table.Cell>{s.store.name}</Table.Cell>
                           <Table.Cell>{s.dateSold}</Table.Cell>
                           <Table.Cell>
-                            <Button color='green'>Edit</Button>
+                            <Button color='green' >Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
                             <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>

@@ -6,7 +6,7 @@ import axios from 'axios'
 
  
 
-export class EditCustomer extends Component {
+export class EditStore extends Component {
 
     constructor(props) {
         
@@ -35,9 +35,9 @@ this.handleChange = this.handleChange.bind(this);
 
   };
 
-    editCustomer = () => {
+    editStore = () => {
 
-        axios.put('/Customers/PutCustomer/' + this.state.id,{
+        axios.put('/Stores/PutStore/' + this.state.id,{
 
             id: this.state.id,
 
@@ -65,23 +65,23 @@ this.handleChange = this.handleChange.bind(this);
  
 
     render() { 
-        const { showEditCustomerModel, openEditCustomerModal } = this.props
+        const { showEditStoreModel, openEditStoreModal } = this.props
 
 
         return (
            
             <Modal
-      open={ showEditCustomerModel }
+      open={ showEditStoreModel }
      
     >
-      <Modal.Header>Edit Customer</Modal.Header>
+      <Modal.Header>Edit Store</Modal.Header>
       <Modal.Content>
         <Form>
             <Form.Field>
 
-            <label>Customer ID</label>
+            <label>Store ID</label>
 
-            <input type='text' name='id' placeholder='Customer Identification' onChange={this.handleChange.bind(this)}
+            <input type='text' name='id' placeholder='Store Identification' onChange={this.handleChange.bind(this)}
 
             value={this.state.id}/>
 
@@ -89,7 +89,7 @@ this.handleChange = this.handleChange.bind(this);
 
             <Form.Field>
 
-            <label>Customer Name</label>
+            <label>Store Name</label>
 
             <input type='text' name='name' placeholder='Name' onChange={this.handleChange.bind(this)}
 
@@ -99,7 +99,7 @@ this.handleChange = this.handleChange.bind(this);
 
             <Form.Field>
 
-            <label>Customer Address</label>
+            <label>Store Address</label>
 
             <input type='text' name='address' placeholder='Address' onChange={this.handleChange.bind(this)}
 
@@ -111,14 +111,14 @@ this.handleChange = this.handleChange.bind(this);
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => openEditCustomerModal(false)}>
+        <Button color='black' onClick={() => openEditStoreModal(false)}>
           Cancel
         </Button>
         <Button
           content="Submit"
           labelPosition='right'
           icon='checkmark'
-          onClick={this.editCustomer.bind(this)}
+          onClick={this.editStore.bind(this)}
           positive
         />
 
@@ -129,7 +129,4 @@ this.handleChange = this.handleChange.bind(this);
 
 }}
 
-export default EditCustomer
-
-
- 
+export default EditStore

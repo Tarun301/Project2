@@ -3,6 +3,7 @@ import { Table } from 'semantic-ui-react'
 import axios from 'axios'
 import { Button } from 'semantic-ui-react'
 import Createproduct from './Createproduct';
+import EditProduct from './EditProduct';
 
 
 export class Product extends Component {
@@ -11,6 +12,7 @@ export class Product extends Component {
         this.state = {
             products: [],
             showCreateproductModel: false,
+            showEditProductModel: false,
         };
     }
 
@@ -39,6 +41,15 @@ export class Product extends Component {
   
     };
 
+    openEditProductModal = (value) => {
+      this.setState({
+        showEditProductModel: value,
+      });
+  
+    };
+
+
+
     deleteRecord = (id) => {
       axios
           .delete(`products/DeleteProduct/${id}`)
@@ -53,10 +64,11 @@ export class Product extends Component {
 
 
   render() {
-      const { products, showCreateproductModel } = this.state;
+      const { products, showCreateproductModel, showEditProductModel } = this.state;
     return (
       <div>
         <Createproduct showCreateproductModel={showCreateproductModel} openCreateproductModal={this.openCreateproductModal} fetchProducts={this.fetchProducts}/>
+        <EditProduct showEditProductModel={showEditProductModel} openEditProductModal={this.openEditProductModal} fetchProducts={this.fetchProducts}/>
         <Button color='blue' className='product-create-button' onClick={() => this.openCreateproductModal(true)}>Create Product</Button>
           <Table celled>
             <Table.Header>
@@ -75,7 +87,7 @@ export class Product extends Component {
                           <Table.Cell>{s.name}</Table.Cell>
                           <Table.Cell>{s.price}</Table.Cell>
                           <Table.Cell>
-                            <Button color='green'>Edit</Button>
+                            <Button color='green' onClick={() => this.openEditProductModal(true)}>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
                             <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>

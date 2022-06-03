@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import axios from 'axios'
 import Createstore from './Createstore';
+import EditStore from './EditStore';
 
 
 export class Store extends Component {
@@ -10,6 +11,7 @@ export class Store extends Component {
         this.state = {
             stores: [],
             showCreatestoreModel: false,
+            showEditStoreModel: false,
         };
     }
 
@@ -38,6 +40,15 @@ export class Store extends Component {
   
     };
 
+    openEditStoreModal = (value) => {
+      this.setState({
+        showEditStoreModel: value,
+      });
+  
+    };
+
+
+
     deleteRecord = (id) => {
       axios
           .delete(`stores/DeleteStore/${id}`)
@@ -51,10 +62,12 @@ export class Store extends Component {
 
 
   render() {
-      const { stores, showCreatestoreModel } = this.state;
+      const { stores, showCreatestoreModel, showEditStoreModel } = this.state;
     return (
       <div>
         <Createstore showCreatestoreModel={showCreatestoreModel} openCreatestoreModal={this.openCreatestoreModal} fetchStores={this.fetchStores}/>
+        <EditStore showEditStoreModel={showEditStoreModel} openEditStoreModal={this.openEditStoreModal} fetchStores={this.fetchStores}/>
+
         <Button color='blue' className='store-create-button' onClick={() => this.openCreatestoreModal(true)}>Create Store</Button>
           <Table celled>
             <Table.Header>
@@ -73,7 +86,7 @@ export class Store extends Component {
                           <Table.Cell>{s.name}</Table.Cell>
                           <Table.Cell>{s.address}</Table.Cell>
                           <Table.Cell>
-                            <Button color='green'>Edit</Button>
+                            <Button color='green' onClick={() => this.openEditStoreModal(true)}>Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
                             <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>

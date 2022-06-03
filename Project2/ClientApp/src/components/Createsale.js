@@ -26,7 +26,6 @@ const { showCreatesaleModel, openCreatesaleModal, fetchSales } = props;
           DateSold: DateSold,
         })
         .then(({ data }) => {
-            //this.fetchSales();
             fetchSales();
             openCreatesaleModal(false);
             console.log(data);
@@ -47,15 +46,15 @@ const { showCreatesaleModel, openCreatesaleModal, fetchSales } = props;
       <Modal.Content>
         <Form>
             <Form.Field>
-            <label>Customer</label>
-            <input placeholder='Customer' onChange={(e) => setCustomerId(e.target.value)}/>
+            <label>Customer ID</label>
+            <input placeholder='Customer' onChange={(e) => setCustomerId(e.target.value)} />
             </Form.Field>
             <Form.Field>
-            <label>Product</label>
+            <label>Product ID</label>
             <input placeholder='Product' onChange={(e) => setProductId(e.target.value)} />
             </Form.Field>
             <Form.Field>
-            <label>Store</label>
+            <label>Store ID </label>
             <input placeholder='Store' onChange={(e) => setStoreId(e.target.value)} />
             </Form.Field>
             <Form.Field>

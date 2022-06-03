@@ -6,7 +6,7 @@ import axios from 'axios'
 
  
 
-export class EditCustomer extends Component {
+export class EditProduct extends Component {
 
     constructor(props) {
         
@@ -16,7 +16,7 @@ export class EditCustomer extends Component {
 
         this.state = {
 
-            id: "",name:"", address:""
+            id: "",name:"", price:""
 
 
          };
@@ -35,15 +35,15 @@ this.handleChange = this.handleChange.bind(this);
 
   };
 
-    editCustomer = () => {
+    editProduct = () => {
 
-        axios.put('/Customers/PutCustomer/' + this.state.id,{
+        axios.put('/Products/PutProduct/' + this.state.id,{
 
             id: this.state.id,
 
             name : this.state.name,
 
-            address : this.state.address
+            price : this.state.price
 
         })
 
@@ -65,23 +65,23 @@ this.handleChange = this.handleChange.bind(this);
  
 
     render() { 
-        const { showEditCustomerModel, openEditCustomerModal } = this.props
+        const { showEditProductModel, openEditProductModal } = this.props
 
 
         return (
            
             <Modal
-      open={ showEditCustomerModel }
+      open={ showEditProductModel }
      
     >
-      <Modal.Header>Edit Customer</Modal.Header>
+      <Modal.Header>Edit Product</Modal.Header>
       <Modal.Content>
         <Form>
             <Form.Field>
 
-            <label>Customer ID</label>
+            <label>Product ID</label>
 
-            <input type='text' name='id' placeholder='Customer Identification' onChange={this.handleChange.bind(this)}
+            <input type='text' name='id' placeholder='Product Identification' onChange={this.handleChange.bind(this)}
 
             value={this.state.id}/>
 
@@ -89,7 +89,7 @@ this.handleChange = this.handleChange.bind(this);
 
             <Form.Field>
 
-            <label>Customer Name</label>
+            <label>Product Name</label>
 
             <input type='text' name='name' placeholder='Name' onChange={this.handleChange.bind(this)}
 
@@ -99,11 +99,11 @@ this.handleChange = this.handleChange.bind(this);
 
             <Form.Field>
 
-            <label>Customer Address</label>
+            <label>Product Price</label>
 
-            <input type='text' name='address' placeholder='Address' onChange={this.handleChange.bind(this)}
+            <input type='text' name='price' placeholder='Price' onChange={this.handleChange.bind(this)}
 
-            value={this.state.address}/>
+            value={this.state.price}/>
 
             </Form.Field>
 
@@ -111,14 +111,14 @@ this.handleChange = this.handleChange.bind(this);
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => openEditCustomerModal(false)}>
+        <Button color='black' onClick={() => openEditProductModal(false)}>
           Cancel
         </Button>
         <Button
           content="Submit"
           labelPosition='right'
           icon='checkmark'
-          onClick={this.editCustomer.bind(this)}
+          onClick={this.editProduct.bind(this)}
           positive
         />
 
@@ -129,7 +129,4 @@ this.handleChange = this.handleChange.bind(this);
 
 }}
 
-export default EditCustomer
-
-
- 
+export default EditProduct
