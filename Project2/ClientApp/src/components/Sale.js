@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import axios from 'axios'
 import Createsale from './Createsale';
+import EditSale from './EditSale';
 
 
 
@@ -12,6 +13,7 @@ export class Sale extends Component {
         this.state = {
             Sales: [],
             showCreatesaleModel: false,
+            showEditSaleModel: false,
         };
     }
 
@@ -51,16 +53,23 @@ export class Sale extends Component {
   
     };
 
+    openEditSaleModal = (value) => {
+      this.setState({
+        showEditSaleModel: value,
+      });
+  
+    };
+
     
 
 
 
   render() {
-      const { Sales, showCreatesaleModel } = this.state;
+      const { Sales, showCreatesaleModel, showEditSaleModel } = this.state;
     return (
       <div>
         <Createsale showCreatesaleModel={showCreatesaleModel} openCreatesaleModal={this.openCreatesaleModal} fetchSales={this.fetchSales}/>
-        
+        <EditSale showEditSaleModel={showEditSaleModel} openEditSaleModal={this.openEditSaleModal} fetchSales={this.fetchSales}/>
         <Button color='blue' className='sale-create-button' onClick={() => this.openCreatesaleModal(true)}>Create Sale</Button>
           <Table celled>
             <Table.Header>
@@ -83,7 +92,7 @@ export class Sale extends Component {
                           <Table.Cell>{s.store.name}</Table.Cell>
                           <Table.Cell>{s.dateSold}</Table.Cell>
                           <Table.Cell>
-                            <Button color='green' >Edit</Button>
+                            <Button color='green' onClick={() => this.openEditSaleModal(true)} >Edit</Button>
                           </Table.Cell>
                           <Table.Cell>
                             <Button color='red' onClick={() => this.deleteRecord(s.id)}>Delete</Button>
